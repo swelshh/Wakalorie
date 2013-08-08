@@ -1,8 +1,11 @@
 ##Wakalorie##
 
 Copyright 2013 CoreBits DataWorks LLC
+
 http//corebitsdw.com
+
 Released under the MIT license (including in distribution in MIT LICENSE.txt)
+
 
 A Wakanda application to help people track their weight and what they eat.
 
