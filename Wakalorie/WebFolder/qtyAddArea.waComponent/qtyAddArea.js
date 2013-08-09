@@ -1,5 +1,6 @@
 ﻿/** 
- * @fileOverview Component with grid for working with user foods
+ * @fileOverview Component with intermediate qty and add button for adding the selected food 
+ *		in the my food grid to the grid of day foods
  * @author Welsh Harris
  * @created 08/08/2013
  *
@@ -17,17 +18,15 @@ function constructor (id) {
 	
 	// @region beginComponentDeclaration// @startlock
 	var $comp = this;
-	this.name = 'foodGrid';
+	this.name = 'qtyAddArea';
 	// @endregion// @endlock
 
 
 	//-------------------------------------------------------------------------
 	//Component API
 	//-------------------------------------------------------------------------
-	var foodGrid = $$(getHtmlId("dataGrid1")),
-		addBtn = $$(getHtmlId("imageButton1")),
-		deleteBtn = $$(getHtmlId("imageButton2")),
-		searchText = $$(getHtmlId("textField1")),
+	var qtyFld = $$(getHtmlId("textField1")),
+		addBtn = $$(getHtmlId("button1")),
 		foodSource = sources.food;
 
 	//init
@@ -35,48 +34,38 @@ function constructor (id) {
 		
 		//add button click event
 		WAF.addListener(addBtn, "click", function(event) {
-			WAKL.foodAddModDlg.add();
+			addFood();
 		});
 		
-		//delete button click event
-		WAF.addListener(deleteBtn, "click", function(event) {
-			removeFood();
+		//attach an even to the qty field so that if the user clicks the return key we will go ahead and save
+		$("#"+qtyFld.id).keydown(function (event) {
+			if (event.which === 13) {
+				addFood();
+			}
 		});
-		
-		//grid onRowClick event
-		WAF.addListener(foodGrid, "onRowClick", function(event) {
-			WAKL.qtyAddArea.setAndGotoQty();
-		});
-		
-		//grid onRowDblClick event
-		WAF.addListener(foodGrid, "onRowDblClick", function(event) {
-			WAKL.foodAddModDlg.modify();
-		});
-			
-		//search bar on keyup event
-		WAF.addListener(searchText, "keyup", _.throttle(
-			function(event) {
-				search();
-			}, 
-			300, {leading: false})
-		);
-	}
-
-	//delete the current food
-	function removeFood() {
-		foodSource.removeCurrent(WAKL.err.async_ErrCheckOnly);
 	}
 	
-	//do a contains search when user types in the search bar
-	function search() {
-		var searchVal = "*"+searchText.getValue()+"*";
-		foodSource.query("name = :1", WAKL.err.async_ErrCheckOnly, {params:[searchVal]});
+	//set qty to 1 and goto the qty var
+	function setAndGotoQty() {
+		qtyFld.setValue(1);
+		qtyFld.focus();
+		$("#"+qtyFld.id).select();//highlight so the user can just type a number
 	}
 
+	//add a food (get the food selected in the my foods grid and send to the day foods grid)
+	function addFood() {
+		var name = foodSource.name,
+			qty = qtyFld.getValue(),
+			totalCal = foodSource.calories * qty;
+
+		WAKL.day.addFood(name, qty, totalCal);
+	}
+	
 	//--------------------
 	//public API
 	//--------------------
 	this.initC = initC;
+	this.setAndGotoQty = setAndGotoQty;
 
 
 	this.load = function (data) {// @lock

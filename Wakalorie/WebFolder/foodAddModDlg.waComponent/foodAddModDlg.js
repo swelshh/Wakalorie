@@ -1,5 +1,5 @@
 ﻿/** 
- * @fileOverview Dialog used to add or modify user foods 
+ * @fileOverview Component with dialog used to add or modify user foods 
  * @author Welsh Harris
  * @created 08/08/2013
  *
@@ -77,9 +77,7 @@ function constructor (id) {
 	//after saving set the qty to 1 and goto the qty var
 	function async_save(event) {
 		if (WAKL.err.async_ThereWasntAnError(event)) {
-			/* temporarily_disabled
 			WAKL.qtyAddArea.setAndGotoQty();
-			*/
 		}
 	}
 	
