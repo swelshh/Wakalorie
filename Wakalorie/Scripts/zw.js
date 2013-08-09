@@ -1,0 +1,1 @@
+﻿//newDay = ds.Day.createEntity();//newDay.date = new Date();//newDay.save();coll = ds.Day.all();coll;//coll.remove();
