@@ -5,7 +5,7 @@
  *
  * @name Wakalorie
  * @copyright (c) 2013 CoreBits DataWorks LLC
- * @license Released under the MIT license (including in distribution in <MIT LICENSE.txt>
+ * @license Released under the MIT license (included in distribution in MIT LICENSE.txt)
  */
 
 model = new DataStoreCatalog();

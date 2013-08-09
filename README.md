@@ -8,4 +8,4 @@ The design guidelines we are building as we develop this project are [here](http
 
 Copyright 2013 CoreBits DataWorks LLC  
 http//corebitsdw.com  
-Released under the MIT license (including in distribution in MIT LICENSE.txt)  
+Released under the MIT license (included in distribution in MIT LICENSE.txt)  
