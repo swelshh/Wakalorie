@@ -1,0 +1,93 @@
+﻿
+(function Component (id) {// @lock
+
+// Add the code that needs to be shared between components here
+
+function constructor (id) {
+	"use strict";
+	
+	// @region beginComponentDeclaration// @startlock
+	var $comp = this;
+	this.name = 'quickAddDlg';
+	// @endregion// @endlock
+
+
+	//-------------------------------------------------------------------------
+	//Component API
+	//-------------------------------------------------------------------------
+	var caloriesFld = $$(getHtmlId("textField2")),
+		descriptionFld = $$(getHtmlId("textField1")),
+		cancelBtn = $$(getHtmlId("button4")),
+		saveBtn = $$(getHtmlId("button5")),
+		dayFoodSource = sources.dayFoods,
+		daySource = sources.day;
+		
+	//init
+	function initC() {
+		
+		//save button click event
+		WAF.addListener(saveBtn, "click", function(event) {
+			save();
+		});
+		
+		//cancel button click event
+		WAF.addListener(cancelBtn, "click", function(event) {
+			cancel();
+		});
+		
+		//attach an even to both fields so that if the user clicks the return key we will go ahead and save
+		$("#"+caloriesFld.id+", "+"#"+descriptionFld.id).keydown(function (event) {
+			if (event.which === 13) {
+				dayFoodSource.totalCal = caloriesFld.getValue(); //without this it won't recognize if the value changed
+				dayFoodSource.foodName = descriptionFld.getValue();
+				save();
+			}
+		});
+	}
+	
+	//open the dialog to create a new food
+	function add() {
+		dayFoodSource.addNewElement();
+		dayFoodSource.day.set(daySource);
+		dayFoodSource.qty = 1;
+		descriptionFld.setValue("Quick Add");
+		dayFoodSource.totalCal = 0;
+		$comp.show();
+		caloriesFld.focus();
+	}
+	
+	//user clicked the save button
+	function save() {
+		dayFoodSource.save(WAKL.err.async_ErrCheckOnly);
+		$comp.hide();
+	}
+	
+	//user clicked the cancel button
+	function cancel() {
+		dayFoodSource.removeCurrentReference();
+		$comp.hide();
+	}
+	
+	//--------------------
+	//public API
+	//--------------------
+	this.initC = initC;
+	this.add = add;
+	
+
+	this.load = function (data) {// @lock
+
+	// @region namespaceDeclaration// @startlock
+	// @endregion// @endlock
+
+	// eventHandlers// @lock
+
+	// @region eventManager// @startlock
+	// @endregion// @endlock
+
+	};// @lock
+
+
+}// @startlock
+return constructor;
+})();// @endlock

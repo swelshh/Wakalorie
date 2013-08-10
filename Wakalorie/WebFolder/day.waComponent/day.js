@@ -35,7 +35,7 @@ function constructor (id) {
 		dayFoodSource = sources.dayFoods,
 		currentDay = moment();
 		
-		//init
+	//init
 	function initC() {
 		
 		//date bar prev day button click event
@@ -51,6 +51,11 @@ function constructor (id) {
 		//weight attribute blur event
 		WAF.addListener(weightFld, "blur", function(event) {
 			saveDay();
+		});
+		
+		//quick add button click event
+		WAF.addListener(quickAddBtn, "click", function(event) {
+			WAKL.quickAddDlg.add();
 		});
 		
 		//delete button click event
