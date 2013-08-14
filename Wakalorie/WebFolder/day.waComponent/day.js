@@ -109,7 +109,7 @@ function constructor (id) {
 	//create a new food for the current day
 	function addFood(name, qty, totalCal) {
 		sources.dayFoods.addNewElement();
-		sources.dayFoods.day.set(daySource); 
+		sources.dayFoods.day.set(sources.day); 
 		sources.dayFoods.foodName = name;
 		sources.dayFoods.qty = qty;
 		sources.dayFoods.totalCal = totalCal;
