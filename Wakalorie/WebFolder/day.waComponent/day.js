@@ -31,8 +31,6 @@ function constructor (id) {
 		quickAddBtn = $$(getHtmlId("button1")),
 		deleteBtn = $$(getHtmlId("imageButton1")),
 		totalCalText = $$(getHtmlId("richText3")),
-		daySource = sources.day,
-		dayFoodSource = sources.dayFoods,
 		currentDay = moment();
 		
 	//init
@@ -83,14 +81,14 @@ function constructor (id) {
 	//load data for a particular day
 	function loadDay() {
 		var date = currentDay.toDate();
-		daySource.query("date = :1", async_loadDay, {params:[date]});
+		sources.day.query("date = :1", async_loadDay, {params:[date]});
 	}
 	var loadDayDebounce = _.debounce(loadDay, 200);
 	
 	//if there is no day record for currentDay then create one
 	function async_loadDay(event) {
 		if (WAKL.err.async_ThereWasntAnError(event)) {
-			if (daySource.length === 0) {
+			if (sources.day.length === 0) {
 				newDay();
 			}
 		}
@@ -98,29 +96,29 @@ function constructor (id) {
 	
 	//create a new day record and display it to the user
 	function newDay() {
-		daySource.addNewElement();
-		daySource.date = currentDay.toDate();
+		sources.day.addNewElement();
+		sources.day.date = currentDay.toDate();
 		saveDay();
 	}
 	
 	//save the current day
 	function saveDay() {
-		daySource.save(WAKL.err.async_ErrCheckOnly);
+		sources.day.save(WAKL.err.async_ErrCheckOnly);
 	}
 	
 	//create a new food for the current day
 	function addFood(name, qty, totalCal) {
-		dayFoodSource.addNewElement();
-		dayFoodSource.day.set(daySource); 
-		dayFoodSource.foodName = name;
-		dayFoodSource.qty = qty;
-		dayFoodSource.totalCal = totalCal;
-		dayFoodSource.save(WAKL.err.async_ErrCheckOnly);
+		sources.dayFoods.addNewElement();
+		sources.dayFoods.day.set(daySource); 
+		sources.dayFoods.foodName = name;
+		sources.dayFoods.qty = qty;
+		sources.dayFoods.totalCal = totalCal;
+		sources.dayFoods.save(WAKL.err.async_ErrCheckOnly);
 	}
 	
 	//remove a food from the current day
 	function removeFood() {
-		dayFoodSource.removeCurrent(WAKL.async_ErrCheckOnly);
+		sources.dayFoods.removeCurrent(WAKL.async_ErrCheckOnly);
 	}
 	
 	//update the date bar day display

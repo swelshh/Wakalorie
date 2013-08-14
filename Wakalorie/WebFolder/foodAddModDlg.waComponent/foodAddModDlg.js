@@ -28,8 +28,7 @@ function constructor (id) {
 		nameFld = $$(getHtmlId("textField1")),
 		caloriesFld = $$(getHtmlId("textField2")),
 		saveBtn = $$(getHtmlId("button5")),
-		cancelBtn = $$(getHtmlId("button4")),
-		foodSource = sources.food;
+		cancelBtn = $$(getHtmlId("button4"));
 	
 	//init
 	function initC() {
@@ -47,7 +46,7 @@ function constructor (id) {
 		//attach an even to the calories field on the new food dialog so that if the user clicks the return key we will go ahead and save
 		$("#"+caloriesFld.id).keydown(function (event) {
 			if (event.which === 13) {
-				foodSource.calories = caloriesFld.getValue(); //without this it won't recognize if the value changed
+				sources.food.calories = caloriesFld.getValue(); //without this it won't recognize if the value changed
 				save();
 			}
 		});
@@ -55,7 +54,7 @@ function constructor (id) {
 	
 	//open the dialog to create a new food
 	function add() {
-		foodSource.addNewElement();
+		sources.food.addNewElement();
 		$comp.show();
 		titleText.setValue("New Food");
 		nameFld.focus();
@@ -70,7 +69,7 @@ function constructor (id) {
 	
 	//user clicked the save button
 	function save() {
-		foodSource.save(async_save);
+		sources.food.save(async_save);
 		$comp.hide();
 	}
 	
@@ -83,10 +82,10 @@ function constructor (id) {
 	
 	//user clicked the cancel button
 	function cancel() {
-		var isNew = foodSource.isNewElement();
+		var isNew = sources.food.isNewElement();
 		
 		if (isNew) {
-			foodSource.removeCurrentReference();
+			sources.food.removeCurrentReference();
 		}
 		$comp.hide();
 	}

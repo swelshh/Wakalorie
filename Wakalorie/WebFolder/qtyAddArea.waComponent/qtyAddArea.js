@@ -26,8 +26,7 @@ function constructor (id) {
 	//Component API
 	//-------------------------------------------------------------------------
 	var qtyFld = $$(getHtmlId("textField1")),
-		addBtn = $$(getHtmlId("button1")),
-		foodSource = sources.food;
+		addBtn = $$(getHtmlId("button1"));
 
 	//init
 	function initC() {
@@ -54,9 +53,9 @@ function constructor (id) {
 
 	//add a food (get the food selected in the my foods grid and send to the day foods grid)
 	function addFood() {
-		var name = foodSource.name,
+		var name = sources.food.name,
 			qty = qtyFld.getValue(),
-			totalCal = foodSource.calories * qty;
+			totalCal = sources.food.calories * qty;
 
 		WAKL.day.addFood(name, qty, totalCal);
 	}

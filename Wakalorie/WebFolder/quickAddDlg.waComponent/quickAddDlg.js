@@ -18,9 +18,7 @@ function constructor (id) {
 	var caloriesFld = $$(getHtmlId("textField2")),
 		descriptionFld = $$(getHtmlId("textField1")),
 		cancelBtn = $$(getHtmlId("button4")),
-		saveBtn = $$(getHtmlId("button5")),
-		dayFoodSource = sources.dayFoods,
-		daySource = sources.day;
+		saveBtn = $$(getHtmlId("button5"));
 		
 	//init
 	function initC() {
@@ -38,8 +36,8 @@ function constructor (id) {
 		//attach an even to both fields so that if the user clicks the return key we will go ahead and save
 		$("#"+caloriesFld.id+", "+"#"+descriptionFld.id).keydown(function (event) {
 			if (event.which === 13) {
-				dayFoodSource.totalCal = caloriesFld.getValue(); //without this it won't recognize if the value changed
-				dayFoodSource.foodName = descriptionFld.getValue();
+				sources.dayFoods.totalCal = caloriesFld.getValue(); //without this it won't recognize if the value changed
+				sources.dayFoods.foodName = descriptionFld.getValue();
 				save();
 			}
 		});
@@ -47,24 +45,24 @@ function constructor (id) {
 	
 	//open the dialog to create a new food
 	function add() {
-		dayFoodSource.addNewElement();
-		dayFoodSource.day.set(daySource);
-		dayFoodSource.qty = 1;
+		sources.dayFoods.addNewElement();
+		sources.dayFoods.day.set(sources.day);
+		sources.dayFoods.qty = 1;
 		descriptionFld.setValue("Quick Add");
-		dayFoodSource.totalCal = 0;
+		sources.dayFoods.totalCal = 0;
 		$comp.show();
 		caloriesFld.focus();
 	}
 	
 	//user clicked the save button
 	function save() {
-		dayFoodSource.save(WAKL.err.async_ErrCheckOnly);
+		sources.dayFoods.save(WAKL.err.async_ErrCheckOnly);
 		$comp.hide();
 	}
 	
 	//user clicked the cancel button
 	function cancel() {
-		dayFoodSource.removeCurrentReference();
+		sources.dayFoods.removeCurrentReference();
 		$comp.hide();
 	}
 	
