@@ -51,7 +51,7 @@ function constructor (id) {
 		descriptionFld.setValue("Quick Add");
 		sources.dayFoods.totalCal = 0;
 		$comp.show();
-		caloriesFld.focus();
+		$("#"+descriptionFld.id).select();//highlight so the user can just start typing
 	}
 	
 	//user clicked the save button
