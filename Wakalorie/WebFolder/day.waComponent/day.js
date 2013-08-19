@@ -90,12 +90,15 @@ function constructor (id) {
 		if (WAKL.err.async_ThereWasntAnError(event)) {
 			if (sources.day.length === 0) {
 				newDay();
+			} else {
+				getDayTotalCal();
 			}
 		}
 	}
 	
 	//create a new day record and display it to the user
 	function newDay() {
+		totalCalText.setValue(0);
 		sources.day.addNewElement();
 		sources.day.date = currentDay.toDate();
 		saveDay();
@@ -113,12 +116,31 @@ function constructor (id) {
 		sources.dayFoods.foodName = name;
 		sources.dayFoods.qty = qty;
 		sources.dayFoods.totalCal = totalCal;
-		sources.dayFoods.save(WAKL.err.async_ErrCheckOnly);
+		sources.dayFoods.save(async_AddRemoveFood);
 	}
 	
 	//remove a food from the current day
 	function removeFood() {
-		sources.dayFoods.removeCurrent(WAKL.async_ErrCheckOnly);
+		sources.dayFoods.removeCurrent(async_AddRemoveFood);
+	}
+	
+	//after adding or removing a food we need to update the total cal for the day
+	function async_AddRemoveFood(event) {
+		if (WAKL.err.async_ThereWasntAnError(event)) {
+			getDayTotalCal();
+		}
+	}
+	
+	//make an async call to the server to get the total cal for the day
+	function getDayTotalCal() {
+		sources.day.callMethod({method: "getTotalCal", onSuccess: async_getDayTotalCal});
+	}
+	
+	//after getting the total cal from the server for this day, display it for the user
+	function async_getDayTotalCal(event) {
+		if (WAKL.err.async_ThereWasntAnError(event)) {
+			totalCalText.setValue(event.result);
+		}
 	}
 	
 	//update the date bar day display
