@@ -91,7 +91,7 @@ function constructor (id) {
 			if (sources.day.length === 0) {
 				newDay();
 			} else {
-				getDayTotalCal();
+				totalCalText.setValue(sources.day.totalCal);
 			}
 		}
 	}
@@ -131,16 +131,18 @@ function constructor (id) {
 		}
 	}
 	
-	//make an async call to the server to get the total cal for the day
+	//get the total cal for the day and display it
 	function getDayTotalCal() {
-		sources.day.callMethod({method: "getTotalCal", onSuccess: async_getDayTotalCal});
-	}
-	
-	//after getting the total cal from the server for this day, display it for the user
-	function async_getDayTotalCal(event) {
-		if (WAKL.err.async_ThereWasntAnError(event)) {
-			totalCalText.setValue(event.result);
-		}
+		//sources.day.callMethod({method: "getTotalCal", onSuccess: async_getDayTotalCal});
+		
+		sources.day.getTotalCal({
+			onSuccess: function(event) {
+				totalCalText.setValue(event.result);
+			},
+			onError: function(event) {
+				WAKL.err.errorHandler(event.error)
+			}
+		});
 	}
 	
 	//update the date bar day display
