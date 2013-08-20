@@ -127,22 +127,15 @@ function constructor (id) {
 	//after adding or removing a food we need to update the total cal for the day
 	function async_AddRemoveFood(event) {
 		if (WAKL.err.async_ThereWasntAnError(event)) {
-			getDayTotalCal();
+			sources.day.getTotalCal({
+				onSuccess: function(event) {
+					totalCalText.setValue(event.result);
+				},
+				onError: function(event) {
+					WAKL.err.errorHandler(event.error)
+				}
+			});
 		}
-	}
-	
-	//get the total cal for the day and display it
-	function getDayTotalCal() {
-		//sources.day.callMethod({method: "getTotalCal", onSuccess: async_getDayTotalCal});
-		
-		sources.day.getTotalCal({
-			onSuccess: function(event) {
-				totalCalText.setValue(event.result);
-			},
-			onError: function(event) {
-				WAKL.err.errorHandler(event.error)
-			}
-		});
 	}
 	
 	//update the date bar day display
