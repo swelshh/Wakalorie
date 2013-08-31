@@ -67,17 +67,14 @@ function constructor (id) {
 		nameFld.focus();
 	}
 	
-	//user clicked the save button
+	//save the food, go to the qty area and set to 1, close the dialog
 	function save() {
-		sources.food.save(async_save);
+		sources.food.save({
+			onSuccess: WAKL.qtyAddArea.setAndGotoQty,
+			onError: WAKL.err.async_ErrCheckOnly}
+		);
+		
 		$comp.hide();
-	}
-	
-	//after saving set the qty to 1 and goto the qty var
-	function async_save(event) {
-		if (WAKL.err.async_ThereWasntAnError(event)) {
-			WAKL.qtyAddArea.setAndGotoQty();
-		}
 	}
 	
 	//user clicked the cancel button

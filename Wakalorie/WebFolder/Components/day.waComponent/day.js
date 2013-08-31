@@ -81,18 +81,21 @@ function constructor (id) {
 	//load data for a particular day
 	function loadDay() {
 		var date = currentDay.toDate();
-		sources.day.query("date = :1", async_loadDay, {params:[date]});
+		sources.day.query("date = :1", {
+			params:[date],
+			onSuccess: async_loadDay,
+			onError: WAKL.err.handler
+		});
 	}
 	var loadDayDebounce = _.debounce(loadDay, 200);
 	
 	//if there is no day record for currentDay then create one
+	//otherwise just get the total cal for the day and display it
 	function async_loadDay(event) {
-		if (WAKL.err.async_ThereWasntAnError(event)) {
-			if (sources.day.length === 0) {
-				newDay();
-			} else {
-				totalCalText.setValue(sources.day.totalCal);
-			}
+		if (sources.day.length === 0) {
+			newDay();
+		} else {
+			totalCalText.setValue(sources.day.totalCal);
 		}
 	}
 	
@@ -106,7 +109,7 @@ function constructor (id) {
 	
 	//save the current day
 	function saveDay() {
-		sources.day.save(WAKL.err.async_ErrCheckOnly);
+		sources.day.save({onError: WAKL.err.handler});
 	}
 	
 	//create a new food for the current day
@@ -116,26 +119,28 @@ function constructor (id) {
 		sources.dayFoods.foodName = name;
 		sources.dayFoods.qty = qty;
 		sources.dayFoods.totalCal = totalCal;
-		sources.dayFoods.save(async_AddRemoveFood);
+		sources.dayFoods.save({
+			onSuccess: afterAddRemoveFood,
+			onError: WAKL.err.handler
+		});
 	}
 	
 	//remove a food from the current day
 	function removeFood() {
-		sources.dayFoods.removeCurrent(async_AddRemoveFood);
+		sources.dayFoods.removeCurrent({
+			onSuccess: afterAddRemoveFood,
+			onError: WAKL.err.handler
+		});
 	}
 	
 	//after adding or removing a food we need to update the total cal for the day
-	function async_AddRemoveFood(event) {
-		if (WAKL.err.async_ThereWasntAnError(event)) {
-			sources.day.getTotalCal({
-				onSuccess: function(event) {
-					totalCalText.setValue(event.result);
-				},
-				onError: function(event) {
-					WAKL.err.errorHandler(event.error)
-				}
-			});
-		}
+	function afterAddRemoveFood(event) {
+		sources.day.getTotalCal({
+			onSuccess: function(event) {
+				totalCalText.setValue(event.result);
+			},
+			onError: WAKL.err.handler
+		});
 	}
 	
 	//update the date bar day display
