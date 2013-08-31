@@ -168,6 +168,7 @@ function constructor (id) {
 	//--------------------
 	this.initC = initC;
 	this.addFood = addFood;
+	this.afterAddRemoveFood = afterAddRemoveFood;
 	
 	
 	this.load = function (data) {// @lock

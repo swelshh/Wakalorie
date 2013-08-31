@@ -27,7 +27,7 @@ function constructor (id) {
 	var foodGrid = $$(getHtmlId("dataGrid1")),
 		addBtn = $$(getHtmlId("imageButton1")),
 		deleteBtn = $$(getHtmlId("imageButton2")),
-		searchText = $$(getHtmlId("textField1"))
+		searchText = $$(getHtmlId("textField1"));
 
 	//init
 	function initC() {
@@ -63,13 +63,16 @@ function constructor (id) {
 
 	//delete the current food
 	function removeFood() {
-		sources.food.removeCurrent(WAKL.err.async_ErrCheckOnly);
+		sources.food.removeCurrent({onError: WAKL.err.handler});
 	}
 	
 	//do a contains search when user types in the search bar
 	function search() {
 		var searchVal = "*"+searchText.getValue()+"*";
-		sources.food.query("name = :1", WAKL.err.async_ErrCheckOnly, {params:[searchVal]});
+		sources.food.query("name = :1", {
+			params: [searchVal],
+			onError: WAKL.err.handler
+		});
 	}
 
 	//--------------------

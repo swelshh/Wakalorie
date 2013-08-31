@@ -71,8 +71,8 @@ function constructor (id) {
 	function save() {
 		sources.food.save({
 			onSuccess: WAKL.qtyAddArea.setAndGotoQty,
-			onError: WAKL.err.async_ErrCheckOnly}
-		);
+			onError: WAKL.err.handler
+		});
 		
 		$comp.hide();
 	}

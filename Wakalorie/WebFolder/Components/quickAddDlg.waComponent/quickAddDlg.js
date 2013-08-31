@@ -56,7 +56,10 @@ function constructor (id) {
 	
 	//user clicked the save button
 	function save() {
-		sources.dayFoods.save(WAKL.err.async_ErrCheckOnly);
+		sources.dayFoods.save({
+			onSuccess: WAKL.day.afterAddRemoveFood,
+			onError: WAKL.err.handler
+		});
 		$comp.hide();
 	}
 	
