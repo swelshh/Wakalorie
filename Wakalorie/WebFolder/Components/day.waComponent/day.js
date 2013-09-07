@@ -31,32 +31,38 @@ function constructor (id) {
 		quickAddBtn = $$(getHtmlId("button1")),
 		deleteBtn = $$(getHtmlId("imageButton1")),
 		totalCalText = $$(getHtmlId("richText3")),
+		datePickerDlg = $$(getHtmlId("container4")),
 		currentDay = moment();
 		
 	//init
 	function initC() {
 		
-		//date bar prev day button click event
+		//display the prev day when user clicks the prev day button
 		WAF.addListener(prevDayBtn, "click", function(event) {
 			prevDay();
 		});
 		
-		//date bar next day button click event
+		//display the next day when user clicks the prev day button
 		WAF.addListener(nextDayBtn, "click", function(event) {
 			nextDay();
 		});
 		
-		//weight attribute blur event
+		//open the date picker dialog when the user clicks on the date bar button
+		WAF.addListener(dateBarBtn, "click", function(event) {
+			datePickerDlg.show();
+		});
+		
+		//save the day when the user changes the weight value
 		WAF.addListener(weightFld, "blur", function(event) {
 			saveDay();
 		});
 		
-		//quick add button click event
+		//open the quick add dialog when the user clicks the quick add button
 		WAF.addListener(quickAddBtn, "click", function(event) {
 			WAKL.quickAddDlg.add();
 		});
 		
-		//delete button click event
+		//delete the currently selected food when the user clicks the delete button
 		WAF.addListener(deleteBtn, "click", function(event) {
 			removeFood();
 		});
@@ -71,6 +77,17 @@ function constructor (id) {
 				nextWeek : '[next] dddd',
 				sameElse : 'L'
 			}
+		});
+		
+		//setup the datePicker
+		$("#"+datePickerDlg.id).datepicker({
+			onSelect: function(date) {
+				currentDay = moment(date);
+				datePickerDlg.hide();
+				updateDateBarBtnTitle();
+				loadDay();
+			},
+			altFormat: "yy-mm-dd"
 		});
 		
 		//load today
