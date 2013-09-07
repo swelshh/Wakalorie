@@ -59,6 +59,9 @@ function constructor (id) {
 			}, 
 			300, {leading: false})
 		);
+		
+		//load all the food records
+		sources.food.allEntities({onError: WAKL.err.handler});
 	}
 
 	//delete the current food
