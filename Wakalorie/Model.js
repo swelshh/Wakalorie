@@ -22,3 +22,6 @@ include("ModelFolder/Food/Food-methods.js");
 include("ModelFolder/DayFood/DayFood-attributes.js");
 include("ModelFolder/DayFood/DayFood-methods.js");
 
+//GenFoods
+include("ModelFolder/GenFoods/GenFoods-attributes.js");
+include("ModelFolder/GenFoods/GenFoods-methods.js");
