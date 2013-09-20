@@ -27,6 +27,7 @@ function constructor (id) {
 	var foodGrid = $$(getHtmlId("dataGrid1")),
 		addBtn = $$(getHtmlId("imageButton1")),
 		deleteBtn = $$(getHtmlId("imageButton2")),
+		genFoodBtn = $$(getHtmlId("imageButton3")),
 		searchText = $$(getHtmlId("textField1"));
 
 	//init
@@ -35,6 +36,11 @@ function constructor (id) {
 		//add button click event
 		WAF.addListener(addBtn, "click", function(event) {
 			WAKL.foodAddModDlg.add();
+		});
+		
+		//gen food button click event
+		WAF.addListener(genFoodBtn, "click", function(event) {
+			WAKL.genFoodAddDlg.open();
 		});
 		
 		//delete button click event
@@ -77,11 +83,21 @@ function constructor (id) {
 			onError: WAKL.err.handler
 		});
 	}
+	
+	//called from another component to add a new food
+	function add(name, calories) {
+		sources.food.addNewElement();
+		sources.food.name = name;
+		sources.food.calories = calories;
+		sources.food.save({onError: WAKL.err.handler});
+		WAKL.qtyAddArea.setAndGotoQty();
+	}
 
 	//--------------------
 	//public API
 	//--------------------
 	this.initC = initC;
+	this.add = add;
 
 
 	this.load = function (data) {// @lock

@@ -1,9 +1,26 @@
-﻿<!DOCTYPE html><section data-group="[]">
+﻿<!DOCTYPE html><section data-group="[['dialog1','container2','richText1','button5','container3','container4']]">
     <meta name="generator" content="Wakanda GUIDesigner"/>
     <meta name="WAF.catalog" content="GenFoods"/>
-    <meta data-type="dataSource" data-lib="WAF" data-source="GenFoods" data-source-type="dataClass" data-dataType="string" data-autoLoad="true" name="WAF.config.datasources" data-scope="local" data-id="{id}genFoods" content="genFoods"/>	<div id="{id}dataGrid1" data-type="dataGrid" data-lib="WAF" class="waf-widget waf-dataGrid " data-label="" data-label-position="top" data-selection-mode="single" data-display-error="true" data-footer-text="item(s)" data-column="[{'sourceAttID':'name','colID':'name','width':'150','title':'name'},{'sourceAttID':'calories','colID':'calories','width':'70','title':'calories'}]" data-constraint-left="true" data-constraint-top="true" data-binding="{id}genFoods"></div>
-			<label id="{id}label1" data-type="label" data-lib="WAF" for="{id}textField1" data-valign="middle" data-margin="5" class="waf-widget waf-label waf-label-textField" data-constraint-left="true" data-constraint-top="true">Label</label>
-		<input id="{id}textField1" data-type="textField" data-lib="WAF" type="text" class="waf-widget waf-textField " data-label="Label" data-label-position="left" data-multiline="false" data-readOnly="false" data-password="false" data-datapicker-on="true" data-datapicker-icon-only="false" data-constraint-left="true" data-constraint-top="true"/>
-		<button id="{id}button1" data-type="button" data-lib="WAF" class="waf-widget waf-button " data-action="simple" data-target="_blank" data-constraint-left="true" data-constraint-top="true" data-text="Cancel"></button>
-		<button id="{id}button2" data-type="button" data-lib="WAF" class="waf-widget waf-button " data-action="simple" data-target="_blank" data-constraint-left="true" data-constraint-top="true" data-text="Add to My Foods"></button>
+    <meta name="WAF.config.datasources" data-type="dataSource" data-source-type="dataClass" data-source="GenFoods" data-scope="global" data-lib="WAF" data-id="genFoods" data-dataType="string" data-autoLoad="false" content="genFoods"/>
+		
+				<div id="{id}dialog1" data-type="dialog" data-lib="WAF" data-front="true" data-hideOnOutsideClick="false" class="waf-widget waf-dialog waf-container" data-constraint-left="true" data-constraint-top="true" data-linked-tag="{id}container2,{id}richText1,{id}button5,{id}container3,{id}container4">
+	 	<div id="{id}container2" data-type="container" data-lib="WAF" class="waf-widget waf-container waf-container-level-1 waf-level-1 waf-widget-header waf-dialog-header" data-label="" data-label-position="top" data-constraint-left="true" data-constraint-top="true" data-constraint-bottom="false" data-constraint-right="true">
+	 	 	<div id="{id}richText1" data-type="richText" data-lib="WAF" class="waf-widget waf-richText waf-dialog-header-title" data-autoWidth="false" data-label="" data-label-position="left" data-target="_blank" data-overflow="Hidden" data-plainText="true" data-constraint-left="true" data-constraint-top="true" data-constraint-bottom="false" data-constraint-right="true">General Foods</div>
+ 	 					<button id="{id}button5" data-type="button" data-lib="WAF" class="waf-widget waf-button waf-dialog-header-buttons waf-dialog-header-close" data-action="simple" data-target="_blank" data-constraint-left="false" data-constraint-top="true" data-constraint-bottom="false" data-constraint-right="true" data-text="x"></button>
+ 	 	</div>
+ 		<div id="{id}container3" data-type="container" data-lib="WAF" class="waf-widget waf-container waf-container-level-1 waf-level-1 waf-widget-body waf-dialog-body" data-label="" data-label-position="top" data-context="['protected','allowDrop','allowBind']" data-constraint-left="true" data-constraint-top="true" data-constraint-bottom="true" data-constraint-right="true">
+	 	 	<div id="{id}dataGrid1" data-type="dataGrid" data-lib="WAF" data-binding="genFoods" class="waf-widget waf-dataGrid " data-label="" data-label-position="top" data-footer-hide="true" data-selection-mode="single" data-display-error="true" data-footer-text="item(s)" data-column="[{'sourceAttID':'name','colID':'name','width':'492','title':'name'},{'sourceAttID':'calories','colID':'calories','width':'89','title':'calories'}]" data-constraint-top="true" data-constraint-left="true" data-constraint-bottom="false" data-constraint-right="false"></div>
+ 	 		<input id="{id}textField1" data-type="textField" data-lib="WAF" type="text" class="waf-widget waf-textField " data-label="Search" data-label-position="left" data-multiline="false" data-readOnly="false" data-password="false" data-datapicker-on="true" data-datapicker-icon-only="false" data-constraint-top="true" data-constraint-left="true" data-constraint-bottom="false" data-constraint-right="false"/>
+ 	 		<label id="{id}label1" data-type="label" data-lib="WAF" for="{id}textField1" data-valign="middle" data-margin="5" data-constraint-top="true" data-constraint-left="true" class="waf-widget waf-label waf-label-textField">Search</label>
+ 	 	</div>
+ 		<div id="{id}container4" data-type="container" data-lib="WAF" class="waf-widget waf-container waf-widget-footer waf-dialog-footer waf-container-level-1 waf-level-1" data-label="" data-label-position="top" data-constraint-left="true" data-constraint-top="false" data-constraint-bottom="true" data-constraint-right="true">
+	 	 			<button id="{id}button1" data-type="button" data-lib="WAF" class="waf-widget waf-button " data-action="simple" data-text="Cancel" data-target="_blank" data-constraint-top="true" data-constraint-left="true" data-constraint-bottom="false" data-constraint-right="false"></button>
+ 	 		<button id="{id}button2" data-type="button" data-lib="WAF" class="waf-widget waf-button " data-action="simple" data-text="Add to My Foods" data-target="_blank" data-constraint-top="true" data-constraint-left="true" data-constraint-bottom="false" data-constraint-right="false"></button>
+ 	 	</div>
+ 	</div>
+	
+	
+	
+	
+	
 	</section>

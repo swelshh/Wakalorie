@@ -22,65 +22,49 @@ function constructor (id) {
 	//init
 	function initC() 
 	{
-	//*************************************************************************************************
-	//  EVENT LISTENERS
-	//*************************************************************************************************
 		//search bar on keyup event
 		WAF.addListener(searchText, "keyup", _.throttle(
-				function(event) 
-				{
+				function(event) {
 					search();
 				}, 
 				300, {leading: false})
 			);
-		
 	
-		//"Cancel" button clicked
-		WAF.addListener(cancelBtn, "click", function(event) 
-		{
+		//add to my foods button clicked
+		WAF.addListener(addToMyFoodsBtn, "click", function(event) {
+			add();
+		});	
+	
+		//cancel button clicked
+		WAF.addListener(cancelBtn, "click", function(event) {
 			$comp.hide();  //close the component
 		});
+
+	}
 	
+	//open the component and set the focus
+	function open() {
+		$comp.show();
+		searchText.focus();
+	}
 	
-		//"Add To My Foods" button clicked
-		WAF.addListener(addToMyFoodsBtn, "click", function(event) 
-		{
-			//var name;  // <--- Have to figure out how to retrieve values from the selected row in a Grid
-			//var calories;  // <--- Have to figure out how to retrieve values from the selected row in a Grid
-			//WAKL.foodGrid.add()
-			//$comp.hide();  //close the component
-		});
-	//*************************************************************************************************
-		
-		//load all the GenFoods records
-		sources.GenFoods.allEntities({onError: WAKL.err.handler});
-	}//End initC()
-	
-	
-	
-	//*************************************************************************************************
-	//  CUSTOM FUNCTIONS
-	//*************************************************************************************************
 	//do a contains search when user types in the search bar
-	function search() 
-	{
+	function search() {
 		var searchVal = "*"+searchText.getValue()+"*";
-		sources.GenFoods.query("name = :1",
-		{
+		sources.genFoods.query("name = :1", {
 			params: [searchVal],
 			onError: WAKL.err.handler
 		});
-	}// End search()	
+	}	
 	
-	
-	//open the component and set the focus
-	function open() 
-	{
-		$comp.show();
-		searchText.focus();
-	}// End open()
-	//*************************************************************************************************
-	
+	//add the selected food to the users's my food list
+	function add() {
+		var name = sources.genFoods.name,
+			calories = sources.genFoods.calories;
+		
+		WAKL.foodGrid.add(name, calories);
+		$comp.hide();  //close the component
+	}
 	
 	//--------------------
 	//public API
