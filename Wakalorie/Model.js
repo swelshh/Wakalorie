@@ -25,3 +25,7 @@ include("ModelFolder/DayFood/DayFood-methods.js");
 //GenFoods
 include("ModelFolder/GenFoods/GenFoods-attributes.js");
 include("ModelFolder/GenFoods/GenFoods-methods.js");
+
+//User
+include("ModelFolder/User/User-attributes.js");
+include("ModelFolder/User/User-methods.js");

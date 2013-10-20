@@ -1,1 +1,18 @@
-﻿<?xml version="1.0" encoding="UTF-8"?><permissions/>
+﻿<?xml version="1.0" encoding="UTF-8"?><permissions>
+<allow action="read" groupName="User" groupID="DAE10C4DA6F040B5BFCD34ECFD60E1BA" resource="Model" temporaryForcePermissions="false" type="model"/>
+<allow action="create" groupName="User" groupID="DAE10C4DA6F040B5BFCD34ECFD60E1BA" resource="Model" temporaryForcePermissions="false" type="model"/>
+<allow action="update" groupName="User" groupID="DAE10C4DA6F040B5BFCD34ECFD60E1BA" resource="Model" temporaryForcePermissions="false" type="model"/>
+<allow action="remove" groupName="User" groupID="DAE10C4DA6F040B5BFCD34ECFD60E1BA" resource="Model" temporaryForcePermissions="false" type="model"/>
+<allow action="describe" groupName="User" groupID="DAE10C4DA6F040B5BFCD34ECFD60E1BA" resource="Model" temporaryForcePermissions="false" type="model"/>
+<allow action="execute" groupName="User" groupID="DAE10C4DA6F040B5BFCD34ECFD60E1BA" resource="Model" temporaryForcePermissions="false" type="model"/>
+<allow action="create" groupName="Admin" groupID="01000000000000000000000000000000" resource="Model.GenFoods" temporaryForcePermissions="false" type="dataClass"/>
+<allow action="update" groupName="Admin" groupID="01000000000000000000000000000000" resource="Model.GenFoods" temporaryForcePermissions="false" type="dataClass"/>
+<allow action="remove" groupName="Admin" groupID="01000000000000000000000000000000" resource="Model.GenFoods" temporaryForcePermissions="false" type="dataClass"/>
+<allow action="execute" groupName="Admin" groupID="01000000000000000000000000000000" resource="Model.GenFoods" temporaryForcePermissions="false" type="dataClass"/>
+<allow action="read" groupName="Admin" groupID="01000000000000000000000000000000" resource="Model.User" temporaryForcePermissions="false" type="dataClass"/>
+<allow action="create" groupName="Admin" groupID="01000000000000000000000000000000" resource="Model.User" temporaryForcePermissions="false" type="dataClass"/>
+<allow action="update" groupName="Admin" groupID="01000000000000000000000000000000" resource="Model.User" temporaryForcePermissions="false" type="dataClass"/>
+<allow action="remove" groupName="Admin" groupID="01000000000000000000000000000000" resource="Model.User" temporaryForcePermissions="false" type="dataClass"/>
+<allow action="describe" groupName="Admin" groupID="01000000000000000000000000000000" resource="Model.User" temporaryForcePermissions="false" type="dataClass"/>
+<allow action="execute" groupName="Admin" groupID="01000000000000000000000000000000" resource="Model.User" temporaryForcePermissions="false" type="dataClass"/>
+</permissions>
