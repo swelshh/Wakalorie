@@ -33,7 +33,7 @@ function constructor (id) {
         });
         
         //if the user clicks the return key we will go ahead and login
-        $("#"+passwordFld.id, "#"+emailFld.id).keydown(function (event) {
+        $("#"+passwordFld.id).keydown(function (event) {
 			if (event.which === 13) {
 				login();
 			}
@@ -52,7 +52,7 @@ function constructor (id) {
     }
 
 	//route the user to the app, or stay on the login screen depending
-	//on whether the call to M.auth.login() resulted in the user
+	//on whether the call to WAKL.auth.login() resulted in the user
 	//authenticating or not
 	function onAfterLogin(event) {
 		if (event.result === true) {
