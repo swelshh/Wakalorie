@@ -12,7 +12,5 @@
 <allow action="create" groupName="Admin" groupID="01000000000000000000000000000000" resource="Model.User" temporaryForcePermissions="false" type="dataClass"/>
 <allow action="update" groupName="Admin" groupID="01000000000000000000000000000000" resource="Model.User" temporaryForcePermissions="false" type="dataClass"/>
 <allow action="remove" groupName="Admin" groupID="01000000000000000000000000000000" resource="Model.User" temporaryForcePermissions="false" type="dataClass"/>
-<allow action="describe" groupName="Admin" groupID="01000000000000000000000000000000" resource="Model.User" temporaryForcePermissions="false" type="dataClass"/>
 <allow action="execute" groupName="Admin" groupID="01000000000000000000000000000000" resource="Model.User" temporaryForcePermissions="false" type="dataClass"/>
-<allow action="describe" groupName="User" groupID="DAE10C4DA6F040B5BFCD34ECFD60E1BA" resource="Model" temporaryForcePermissions="false" type="model"/>
 </permissions>
