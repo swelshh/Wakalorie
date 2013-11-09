@@ -56,7 +56,7 @@ function constructor (id) {
 	//authenticating or not
 	function onAfterLogin(event) {
 		if (event.result === true) {
-			window.location = "/index";
+			window.location = WAKL.CONST.PAGE_APP;
 		} else {
 			errorText.show();
 		}
