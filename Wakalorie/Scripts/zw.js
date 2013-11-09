@@ -1,1 +1,1 @@
-﻿what = myTest("what")what;
+﻿what = currentSession();what;

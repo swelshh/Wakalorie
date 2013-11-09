@@ -29,3 +29,13 @@ include("ModelFolder/GenFoods/GenFoods-methods.js");
 //User
 include("ModelFolder/User/User-attributes.js");
 include("ModelFolder/User/User-methods.js");
+
+
+//ErrDef
+include("ModelFolder/ErrDef/ErrDef-attributes.js");
+include("ModelFolder/ErrDef/ErrDef-methods.js");
+
+
+//ErrLog
+include("ModelFolder/ErrLog/ErrLog-attributes.js");
+include("ModelFolder/ErrLog/ErrLog-methods.js");

@@ -100,7 +100,7 @@ function constructor (id) {
 		var date = currentDay.toDate();
 		sources.day.query("date = :1", {
 			params:[date],
-			onSuccess: async_loadDay,
+			onSuccess: after_loadDay,
 			onError: WAKL.err.handler
 		});
 	}
@@ -108,7 +108,7 @@ function constructor (id) {
 	
 	//if there is no day record for currentDay then create one
 	//otherwise just get the total cal for the day and display it
-	function async_loadDay(event) {
+	function after_loadDay(event) {
 		if (sources.day.length === 0) {
 			newDay();
 		} else {
@@ -137,7 +137,7 @@ function constructor (id) {
 		sources.dayFoods.qty = qty;
 		sources.dayFoods.totalCal = totalCal;
 		sources.dayFoods.save({
-			onSuccess: afterAddRemoveFood,
+			onSuccess: after_AddRemoveFood,
 			onError: WAKL.err.handler
 		});
 	}
@@ -145,13 +145,13 @@ function constructor (id) {
 	//remove a food from the current day
 	function removeFood() {
 		sources.dayFoods.removeCurrent({
-			onSuccess: afterAddRemoveFood,
+			onSuccess: after_AddRemoveFood,
 			onError: WAKL.err.handler
 		});
 	}
 	
 	//after adding or removing a food we need to update the total cal for the day
-	function afterAddRemoveFood(event) {
+	function after_AddRemoveFood(event) {
 		sources.day.getTotalCal({
 			onSuccess: function(event) {
 				totalCalText.setValue(event.result);
@@ -185,7 +185,7 @@ function constructor (id) {
 	//--------------------
 	this.initC = initC;
 	this.addFood = addFood;
-	this.afterAddRemoveFood = afterAddRemoveFood;
+	this.after_AddRemoveFood = after_AddRemoveFood;
 	
 	
 	this.load = function (data) {// @lock
