@@ -22,5 +22,43 @@
 //-------------------------------------------------------------------------
 //class 
 //-------------------------------------------------------------------------
+model.GenFoods.methods.searchBar = function (searchValue) {
+	"use strict";
+	
+	var words = searchValue.split(" "),
+		lastWord = words.pop(),
+		coll_Temp = {},
+		coll_Result = ds.GenFoods.createEntityCollection(),
+		searchedByKeyword = false,
+		i, len;
+	
+	//find by keyword
+	if (words.length > 0) {
+		searchedByKeyword = true;
+		
+		for (i=0, len=words.length; i < len; i++) { 
+			coll_Temp = ds.GenFoods.query("name %% :1", words[i]);
+			if (i === 0) {
+				coll_Result.add(coll_Temp);
+			} else {
+				coll_Result = coll_Result.and(coll_Temp);
+			}
+		}
+	}
+	
+	//do a contains search using the last word passed in
+	if(lastWord.length > 0) {
+		coll_Temp = ds.GenFoods.query("name = :1", "*"+lastWord+"*");
+		if (searchedByKeyword) {
+			coll_Result = coll_Result.and(coll_Temp);
+		} else {
+			coll_Result.add(coll_Temp);
+		}
+	}
+	
+	//return the result
+	return coll_Result;
 
+}
 
+model.GenFoods.methods.searchBar.scope ="public";

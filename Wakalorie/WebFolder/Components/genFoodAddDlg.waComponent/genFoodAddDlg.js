@@ -34,7 +34,7 @@ function constructor (id) {
 		WAF.addListener(addToMyFoodsBtn, "click", function(event) {
 			add();
 		});	
-	
+		
 		//cancel button clicked
 		WAF.addListener(cancelBtn, "click", function(event) {
 			$comp.hide();  //close the component
@@ -45,15 +45,30 @@ function constructor (id) {
 	//open the component and set the focus
 	function open() {
 		$comp.show();
+		searchText.setValue("");
+		sources.genFoods.allEntities({onError: WAKL.err.handler});
+		
+		//return key is like clicking the add button
+		$(document).on("keydown.genFoodAddDlg", function (event) {
+			if (event.which === 13) {
+				add();
+			}
+		});
+	
+		//start in the search bar
 		searchText.focus();
 	}
 	
 	//do a contains search when user types in the search bar
 	function search() {
-		var searchVal = "*"+searchText.getValue()+"*";
-		sources.genFoods.query("name = :1", {
-			params: [searchVal],
-			onError: WAKL.err.handler
+		var searchVal = searchText.getValue();
+
+		sources.genFoods.searchBar({
+			onSuccess: function(event) {
+				sources.genFoods.setEntityCollection(event.result);
+			},
+			onError: WAKL.err.handler,
+			arguments: [searchVal] //swh_todo: docs say this should be params, check to see if that works in Wak6
 		});
 	}	
 	
@@ -62,8 +77,16 @@ function constructor (id) {
 		var name = sources.genFoods.name,
 			calories = sources.genFoods.calories;
 		
-		WAKL.foodGrid.add(name, calories);
-		$comp.hide();  //close the component
+		//add the selected food to the user's list of foods
+		if(sources.genFoods.length !== 0) {
+			WAKL.foodGrid.add(name, calories);
+		}
+		
+		//turn off the event handler to make the return key like clicking the add button
+		$(document).off("keydown.genFoodAddDlg");
+		
+		//close the component
+		$comp.hide();  
 	}
 	
 	//--------------------

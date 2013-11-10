@@ -18,7 +18,7 @@ model.GenFoods = new DataClass("GenFoods", "public");
 //storage
 //-------------------------------------------------------------------------
 model.GenFoods.id = new Attribute("storage", "long", "key auto");
-model.GenFoods.name = new Attribute("storage","string");
+model.GenFoods.name = new Attribute("storage","string", "keywords", "btree");
 model.GenFoods.calories = new Attribute("storage","long");
 
 //-------------------------------------------------------------------------

@@ -1,1 +1,1 @@
-﻿what = currentSession();what;
+﻿what = ds.GenFoods.searchBar("grilled cheese");what.length;
