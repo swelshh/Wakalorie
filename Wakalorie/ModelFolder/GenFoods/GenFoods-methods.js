@@ -30,12 +30,14 @@ model.GenFoods.methods.searchBar = function (searchValue) {
 		coll_Temp = {},
 		coll_Result = ds.GenFoods.createEntityCollection(),
 		searchedByKeyword = false,
+		queryString = "",
 		i, len;
 	
-	//find by keyword
+	//find by keyword (for all the words except the last word passed in)
 	if (words.length > 0) {
 		searchedByKeyword = true;
 		
+		 /* old code with a separate query for each word
 		for (i=0, len=words.length; i < len; i++) { 
 			coll_Temp = ds.GenFoods.query("name %% :1", words[i]);
 			if (i === 0) {
@@ -44,6 +46,21 @@ model.GenFoods.methods.searchBar = function (searchValue) {
 				coll_Result = coll_Result.and(coll_Temp);
 			}
 		}
+		*/
+		
+		//build up the query string
+		for (i=0, len=words.length; i < len; i++) { 
+			if (queryString === "") {
+				queryString = "name %% " + words[i];
+			} else {
+				queryString += " and name %% " + words[i];
+			}
+		}
+		
+		//run the query
+		coll_Result = ds.GenFoods.query(queryString);
+		
+		
 	}
 	
 	//do a contains search using the last word passed in

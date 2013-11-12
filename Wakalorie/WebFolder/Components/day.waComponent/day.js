@@ -114,6 +114,8 @@ function constructor (id) {
 		} else {
 			totalCalText.setValue(sources.day.totalCal);
 		}
+		
+		WAKL.caloriesWeightsChart.processChart(sources.day.date);
 	}
 	
 	//create a new day record and display it to the user
@@ -127,6 +129,7 @@ function constructor (id) {
 	//save the current day
 	function saveDay() {
 		sources.day.save({onError: WAKL.err.handler});
+		WAKL.caloriesWeightsChart.processChart(sources.day.date);
 	}
 	
 	//create a new food for the current day
@@ -155,6 +158,7 @@ function constructor (id) {
 		sources.day.getTotalCal({
 			onSuccess: function(event) {
 				totalCalText.setValue(event.result);
+				WAKL.caloriesWeightsChart.processChart(sources.day.date);
 			},
 			onError: WAKL.err.handler
 		});
