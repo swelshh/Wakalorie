@@ -20,8 +20,8 @@ function constructor (id) {
 		addToMyFoodsBtn = $$(getHtmlId("button2"));
 		
 	//init
-	function initC() 
-	{
+	function initC() {
+		
 		//search bar on keyup event
 		WAF.addListener(searchText, "keyup", _.throttle(
 				function(event) {
