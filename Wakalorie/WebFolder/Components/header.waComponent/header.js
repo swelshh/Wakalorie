@@ -34,6 +34,11 @@ function constructor (id) {
 	
 	//logout
 	function logout() {
+		WAKL.auth.logout(after_Logout);
+	}
+	
+	//after logout
+	function after_Logout() {
 		window.location = WAKL.CONST.PAGE_LOGIN;
 	}
 	
