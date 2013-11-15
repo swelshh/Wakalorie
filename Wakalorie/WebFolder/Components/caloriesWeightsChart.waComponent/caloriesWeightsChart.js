@@ -60,12 +60,26 @@ function constructor (id) {
 	
 	
 	function async_pluck(calWgtArray) {
-			var caloriesArray,
-				wgtsArray;
+			var caloriesArray = [],
+				wgtsArray = [],
+				numElemsToAdd,
+				i,
+				arraySize = calWgtArray.length;
 			
 			//Pluck out calories and weights
 			caloriesArray = _.pluck(calWgtArray, 'totalCal');
-			wgtsArray = _.pluck(calWgtArray, 'weight');
+			wgtsArray = _.pluck(calWgtArray, 'weight');			
+		
+			// Pad the front of the arrays if there isn't 7 days worth of data
+			if(arraySize < 7)
+			{
+				numElemsToAdd = 7-arraySize;
+				for (i=0; i<numElemsToAdd; i++)
+				{
+					caloriesArray.unshift(0);
+					wgtsArray.unshift(0);
+				}
+			}
 					  
 			//Build the series for the jqPlot
 			async_buildSeries(caloriesArray, wgtsArray);			
@@ -87,15 +101,7 @@ function constructor (id) {
 			
 		for (i=0; i<=numDaysToProcess; i++)
 		{				
-			if(i===0)
-			{
-				date = from.add('days',0).format("MMM Do");
-			}
-			else
-			{
-				date = from.add('days',1).format("MMM Do");
-			}
-			
+			date = from.add('days',1).format("MMM Do");			
 			cals = caloriesArray[i];
 			wgt = wgtsArray[i];
 			
