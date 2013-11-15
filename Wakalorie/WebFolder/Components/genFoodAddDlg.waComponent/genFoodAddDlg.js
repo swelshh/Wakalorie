@@ -24,11 +24,16 @@ function constructor (id) {
 		
 		//search bar on keyup event
 		WAF.addListener(searchText, "keyup", _.throttle(
-				function(event) {
-					search();
-				}, 
-				300, {leading: false})
-			);
+			function(event) {
+				search();
+			}, 
+			300, {leading: false})
+		);
+		
+		//grid onRowDblClick event
+		WAF.addListener(genFoodGrid, "onRowDblClick", function(event) {
+			add();
+		});
 	
 		//add to my foods button clicked
 		WAF.addListener(addToMyFoodsBtn, "click", function(event) {
@@ -49,11 +54,13 @@ function constructor (id) {
 		sources.genFoods.allEntities({onError: WAKL.err.handler});
 		
 		//return key is like clicking the add button
+		/* nevermind, some users aren't used to type ahead search and think they need to hit the return key to do a search
 		$(document).on("keydown.genFoodAddDlg", function (event) {
 			if (event.which === 13) {
 				add();
 			}
 		});
+		*/
 	
 		//start in the search bar
 		searchText.focus();
@@ -83,7 +90,9 @@ function constructor (id) {
 		}
 		
 		//turn off the event handler to make the return key like clicking the add button
+		/* nevermind, some users aren't used to type ahead search and think they need to hit the return key to do a search
 		$(document).off("keydown.genFoodAddDlg");
+		*/
 		
 		//close the component
 		$comp.hide();  

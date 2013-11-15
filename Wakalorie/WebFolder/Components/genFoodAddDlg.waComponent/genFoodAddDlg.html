@@ -1,7 +1,8 @@
-﻿<!DOCTYPE html><section data-group="[['dialog1','container2','richText1','button5','container3','container4']]">
+﻿<!DOCTYPE html><section data-group="[['dialog1','container2','richText1','button5','container3','container4'],['container1','button3'],['button2']]" class="waf-theme softGray">
     <meta name="generator" content="Wakanda GUIDesigner"/>
-    <meta name="WAF.catalog" content="GenFoods"/>
+    <meta name="WAF.catalog" content="GenFoods,Food"/>
     <meta name="WAF.config.datasources" data-type="dataSource" data-source-type="dataClass" data-source="GenFoods" data-scope="global" data-lib="WAF" data-id="genFoods" data-dataType="string" data-autoLoad="false" content="genFoods"/>
+    <meta name="WAF.config.datasources" data-type="dataSource" data-source-type="dataClass" data-source="Food" data-scope="global" data-lib="WAF" data-id="food" data-dataType="string" data-autoLoad="false" content="food"/>
 		
 				<div id="{id}dialog1" data-type="dialog" data-linked-tag="{id}container2,{id}richText1,{id}button5,{id}container3,{id}container4" data-lib="WAF" data-hideOnOutsideClick="false" data-front="true" data-constraint-top="true" data-constraint-left="true" class="waf-widget waf-dialog waf-container">
 	 	<div id="{id}container2" data-type="container" data-lib="WAF" data-label-position="top" data-label="" data-constraint-top="true" data-constraint-right="true" data-constraint-left="true" data-constraint-bottom="false" class="waf-widget waf-container waf-container-level-1 waf-level-1 waf-widget-header waf-dialog-header">
@@ -14,9 +15,9 @@
  	 		<label id="{id}label1" for="{id}textField1" data-valign="middle" data-type="label" data-margin="5" data-lib="WAF" data-constraint-top="true" data-constraint-left="true" class="waf-widget waf-label waf-label-textField">Search</label>
  	 	</div>
  		<div id="{id}container4" data-type="container" data-lib="WAF" data-label-position="top" data-label="" data-constraint-top="false" data-constraint-right="true" data-constraint-left="true" data-constraint-bottom="true" class="waf-widget waf-container waf-widget-footer waf-dialog-footer waf-container-level-1 waf-level-1">
-	 	 			<button id="{id}button1" data-type="button" data-text="Cancel" data-target="_blank" data-lib="WAF" data-constraint-top="true" data-constraint-right="false" data-constraint-left="true" data-constraint-bottom="false" data-action="simple" class="waf-widget waf-button "></button>
- 	 		<button id="{id}button2" data-type="button" data-text="Add to My Foods" data-target="_blank" data-lib="WAF" data-constraint-top="true" data-constraint-right="false" data-constraint-left="true" data-constraint-bottom="false" data-action="simple" class="waf-widget waf-button "></button>
- 	 	</div>
+	 	 				<button id="{id}button1" data-type="button" data-text="Cancel" data-target="_blank" data-role="cancel" data-lib="WAF" data-constraint-top="true" data-constraint-right="true" data-constraint-left="false" data-constraint-bottom="false" data-action="simple" class="waf-widget waf-button waf-role-cancel"></button>
+ 	 		<button id="{id}button2" data-type="button" data-text="Add to My Foods" data-target="_blank" data-role="confirm" data-lib="WAF" data-constraint-top="true" data-constraint-right="true" data-constraint-left="false" data-constraint-bottom="false" data-action="simple" class="waf-widget waf-button waf-role-confirm"></button>
+ 	 			</div>
  	</div>
 	
 	
