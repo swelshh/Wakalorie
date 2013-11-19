@@ -14,7 +14,8 @@ function constructor (id) {
 	//-------------------------------------------------------------------------
 	//Component API
 	//-------------------------------------------------------------------------
-	var logoutBtn = $$(getHtmlId("button1"));
+	var logoutBtn = $$(getHtmlId("button1")),
+		helpBtn = $$(getHtmlId("button2"));
 	
 	//init
 	function initC() {
@@ -24,11 +25,18 @@ function constructor (id) {
 			logout();
 		});	
 		
-		//only make the logout button visible if the user is logged in
+		//help button clicked
+		WAF.addListener(helpBtn, "click", function(event) {
+			WAKL.tips.toggle();
+		});	
+		
+		//only make the buttons visible if the user is logged in
 		if (WAKL.auth.isLoggedIn() === true) {
 			logoutBtn.show();
+			helpBtn.show();
 		} else {
 			logoutBtn.hide();
+			helpBtn.hide();
 		}
 	}
 	
@@ -41,6 +49,7 @@ function constructor (id) {
 	function after_Logout() {
 		window.location = WAKL.CONST.PAGE_LOGIN;
 	}
+		
 	
 	//--------------------
 	//public API
