@@ -1,1 +1,1 @@
-﻿ds.User.all();
+﻿ds.ErrLog.all();

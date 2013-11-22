@@ -70,11 +70,15 @@ function constructor (id) {
 	//save the food, go to the qty area and set to 1, close the dialog
 	function save() {
 		sources.food.save({
-			onSuccess: WAKL.qtyAddArea.setAndGotoQty,
-			onError: WAKL.err.handler
+			onSuccess: function(event) {
+				$comp.hide();
+				WAKL.qtyAddArea.setAndGotoQty()
+			},
+			onError: function(event) {
+				cancel();
+				WAKL.err.handler(event);
+			}
 		});
-		
-		$comp.hide();
 	}
 	
 	//user clicked the cancel button
