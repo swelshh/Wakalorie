@@ -1,1 +1,1 @@
-﻿ds.ErrLog.all();
+﻿ user = ds.User.createEntity();user.email = "test"user.password = "test";user.save();

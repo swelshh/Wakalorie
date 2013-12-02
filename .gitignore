@@ -25,3 +25,4 @@ sessionID.json
 # Wakanda backup
 *.waBackup
 Testing/*
+pass.txt
