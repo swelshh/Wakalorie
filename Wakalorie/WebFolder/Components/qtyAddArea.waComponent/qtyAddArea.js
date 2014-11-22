@@ -1,6 +1,5 @@
 ﻿/** 
- * @fileOverview Component with intermediate qty and add button for adding the selected food 
- *		in the my food grid to the grid of day foods
+ * @fileOverview Web Component: Qty Add Area
  * @author Welsh Harris
  * @created 08/08/2013
  *
@@ -9,77 +8,60 @@
  * @license Released under the MIT license (included in distribution in MIT LICENSE.txt)
  */
  
-(function Component (id) {// @lock
-
-// Add the code that needs to be shared between components here
-
+ /*global WAKL:false, _:false */
+ 
+(function Component (id) {
+"use strict";
 function constructor (id) {
-	"use strict";
+var $comp = this;
+this.name = 'qtyAddArea';
+this.load = function (data) {
 	
-	// @region beginComponentDeclaration// @startlock
-	var $comp = this;
-	this.name = 'qtyAddArea';
-	// @endregion// @endlock
-
-
-	//-------------------------------------------------------------------------
-	//Component API
-	//-------------------------------------------------------------------------
-	var qtyFld = $$(getHtmlId("textField1")),
-		addBtn = $$(getHtmlId("button1"));
-
-	//init
-	function initC() {
-		
-		//add button click event
-		WAF.addListener(addBtn, "click", function(event) {
-			addFood();
-		});
-		
-		//attach an even to the qty field so that if the user clicks the return key we will go ahead and save
-		$("#"+qtyFld.id).keydown(function (event) {
-			if (event.which === 13) {
-				addFood();
-			}
-		});
-	}
+	//component API
+    //=================================================================================================
+	var cs = $comp.sources,
+		cw = $comp.widgets,
+		qtyFld = cw.textField1,
+		addBtn = cw.button1;
 	
-	//set qty to 1 and goto the qty var
+	/** set qty to 1 and goto the qty var */
 	function setAndGotoQty() {
 		qtyFld.setValue(1);
 		qtyFld.focus();
 		$("#"+qtyFld.id).select();//highlight so the user can just type a number
 	}
 
-	//add a food (get the food selected in the my foods grid and send to the day foods grid)
+	/**add a food (get the food selected in the my foods grid and send to the day foods grid) */
 	function addFood() {
-		var name = sources.food.name,
+		var name = sources.userFood.name,
 			qty = qtyFld.getValue(),
-			totalCal = sources.food.calories * qty;
+			totalCal = sources.userFood.calories * qty;
 
 		WAKL.day.addFood(name, qty, totalCal);
 	}
+		
+
+	//on load
+    //=================================================================================================
+    
+    //add button click event
+	addBtn.addListener("click", function(event) {
+		addFood();
+	});
 	
-	//--------------------
+	//attach an even to the qty field so that if the user clicks the return key we will go ahead and save
+	$("#"+qtyFld.id).keydown(function (event) {
+		if (event.which === 13) {
+			addFood();
+		}
+	});
+	
+	
 	//public API
-	//--------------------
-	this.initC = initC;
+    //=================================================================================================
 	this.setAndGotoQty = setAndGotoQty;
-
-
-	this.load = function (data) {// @lock
-
-	// @region namespaceDeclaration// @startlock
-	// @endregion// @endlock
-
-	// eventHandlers// @lock
-
-	// @region eventManager// @startlock
-	// @endregion// @endlock
-
-	};// @lock
-
-
-}// @startlock
+	
+};
+}
 return constructor;
-})();// @endlock
+})();

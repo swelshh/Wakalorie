@@ -1,0 +1,1 @@
+﻿//remove all test datads.Day.all().remove();ds.DayFood.all().remove();ds.User.all().remove();ds.UserFood.all().remove();

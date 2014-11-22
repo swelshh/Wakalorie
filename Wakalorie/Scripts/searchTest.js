@@ -1,0 +1,1 @@
+﻿//genFoodColl_Pizza = ds.GenFood.searchBar("pizza pep");//genFoodColl_Pizza//genFoodColl_Burger = ds.GenFood.searchBar("cheeseburger");//genFoodColl_Burger//genFoodColl = genFoodColl_Burger.add(genFoodColl_Pizza);//genFoodColl//genFoodColl_Burger//genFoodColl_Pizza.length;

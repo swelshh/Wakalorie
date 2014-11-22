@@ -1,0 +1,1 @@
+﻿var userEmail,	userPassword,	user;	//SET THE USERNAME AND PASSWORD FOR THE USER YOU WANT TO ADD/MODIFYuserEmail = "demo";userPassword = "demo";user = ds.User.find("email = :1", userEmail);if (!user) {	user = ds.User.createEntity();	user.email = userEmail;	}user.password = userPassword;user.save();user; //jshint_ignore

@@ -1,0 +1,270 @@
+/**
+ * Widget ListView
+ *
+ */
+.waf-widget.waf-wlistview {
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+    -webkit-overflow-scrolling: touch;
+}
+
+.waf-widget.waf-wlistview li {
+    position: relative;
+    width:  100%;
+
+    overflow: hidden;
+
+    border-style: inherit;
+    border-color: inherit;
+}
+
+.waf-wlistview li{
+    line-height:40px;
+    padding:8px;
+}
+
+.waf-widget.waf-wlistview li::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+.waf-widget.waf-wlistview li .content {
+    position: absolute;
+    top:    0;
+    left:   0;
+    width:  100%;
+    height: 100%;
+}
+.waf-widget.waf-wlistview li .content.waf-state-swyped {
+    left: -50%;
+}
+
+.waf-widget.waf-wlistview li h1,
+.waf-widget.waf-wlistview li h2,
+.waf-widget.waf-wlistview li h3,
+.waf-widget.waf-wlistview li h4,
+.waf-widget.waf-wlistview li h5,
+.waf-widget.waf-wlistview li h6,
+.waf-widget.waf-wlistview li p {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    margin: 0;
+}
+
+.waf-wlistview li{
+    -webkit-transition-property:-webkit-transform;
+    -webkit-transition-duration:.5s;
+}
+
+button::-moz-focus-inner,
+    input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+#waf-body.waf-theme .waf-widget.waf-wlistview{
+    border-radius:0;
+}
+
+.waf-widget.waf-wlistview li p{
+    position:relative;
+    line-height:1.42;
+}
+
+/* Loader */
+.waf-state-loading .waf-skin-spinner {
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+  width: 3em;
+  height: 3em;
+  font-size: 14px;
+  -webkit-animation: waf-kf-spin 1.3s infinite alternate;
+  animation: waf-kf-spin 1.3s infinite alternate;
+  border-width: 0.3em;
+  border-style: solid;
+  border-color: #48bad6 #48bad6 rgba(0, 0, 0, 0.05) rgba(0, 0, 0, 0.05);
+  border-radius: 1000px;
+
+}
+
+@-webkit-keyframes waf-kf-spin {
+  to {
+    -webkit-transform: rotate(2turn);
+    transform: rotate(2turn);
+  }
+}
+
+@keyframes waf-kf-spin {
+  to {
+    -webkit-transform: rotate(2turn);
+    transform: rotate(2turn);
+  }
+}
+
+/* demo templates specifics */
+.waf-wlistview li:nth-child(odd){
+    background-color:#fcfcfc;
+    border-bottom:1px solid #ececec;
+}
+
+.waf-wlistview li strong{
+    float:right;
+}
+
+.waf-widget.waf-wlistview li img {
+    display: block;
+    float: left;
+}
+
+/* emailList template */
+#waf-body.waf-theme .waf-widget.waf-wlistview li.emailList img{
+    max-width:60px;
+    padding:10px;
+}
+
+.waf-theme .waf-wlistview li.emailList.selected{
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#e0eaff), to(#e1e4f5));
+  background-image: -webkit-linear-gradient(top, #e0eaff 0%, #e1e4f5 100%);
+  background-image: -moz-linear-gradient(top, #e0eaff 0%, #e1e4f5 100%);
+  background-image: linear-gradient(to bottom, #e0eaff 0%, #e1e4f5 100%);
+}
+
+#waf-body.waf-theme .waf-widget.waf-wlistview li.emailList{
+    border-top-width:0;
+    border-color:#ededed;
+    background-image:none;
+    background-color:#fff;
+    font-weight:bold;
+}
+
+#waf-body.waf-theme .waf-widget.waf-wlistview li.emailList.read{
+    background-color:#eee;
+    border-color:#cdcdcd;
+    font-weight:normal;
+}
+
+.waf-theme .waf-widget.waf-wlistview li date, .waf-widget.waf-wlistview li.emailList .attachment{
+    width:26px;
+    height:26px;
+    display:block;
+    float:right;
+    line-height:24px;
+    margin:auto 2px;
+    font-weight:normal;
+}
+
+.waf-widget.waf-wlistview li.emailList .attachment{
+	color:#D8451E;
+	font-size:20px;
+	text-align:center;
+}
+
+.waf-theme .waf-widget.waf-wlistview li.emailList date{
+    width:auto;
+    text-align:right;
+}
+
+.waf-theme .waf-widget.waf-wlistview li.emailList .tag{
+    background-color:#4179f7;
+    color:white;
+    height:12px;
+    text-transform:uppercase;
+    font-size:10px;
+    line-height:12px;
+    padding:0 6px;
+    position:absolute;
+    bottom:0;
+    right:0;
+    text-align:center;
+}
+
+.waf-theme .waf-widget.waf-wlistview li.emailList .star{
+    border: none;
+    padding: 0;
+    height: 30px;
+    position: absolute;
+    right: -8px;
+	font-size:22px;
+	line-height:100%;
+	color:#FFDF0D;
+	background-color:transparent;
+    margin: auto 8px;
+    clear: both;
+    top: 15px;
+    z-index:10;
+}
+
+.waf-theme .waf-widget.waf-wlistview li.emailList .stared{
+
+}
+
+.waf-theme .waf-widget.waf-wlistview li.emailList p{
+    padding-right:100px;
+}
+
+/* navList template */
+.waf-theme .waf-widget.waf-wlistview li.navList{
+    background-color:white;
+    background:none;
+}
+
+.waf-theme .waf-widget.waf-wlistview li.navList strong{
+    float:left;
+    font-weight:bold;
+    font-size:14px;
+}
+
+.waf-theme .waf-widget.waf-wlistview li.navList .thumb{
+    width:40px;
+    height:40px;
+    border-radius:40px;
+    -webkit-border-radius:40px;
+}
+
+.waf-theme .waf-widget.waf-wlistview li.navList p{
+    clear:left;
+}
+
+.waf-theme .waf-widget.waf-wlistview li.navList a.nav{
+    font-weight:bold;
+    float:right;
+    color:#bbb;
+    font-size:20px;
+}
+
+/* rssList template */
+.waf-theme .waf-widget.waf-wlistview li.rssList{
+    background-color:white;
+    background:none;
+    margin:6px 0;
+    height:90px;
+}
+
+.waf-theme .waf-widget.waf-wlistview li.rssList .thumb{
+    width:50px;
+    height:50px;
+}
+
+.waf-theme .waf-widget.waf-wlistview li.rssList p{
+    float:left;
+    font-weight:bold;
+    height:54px;
+    text-overflow:none;
+    white-space:normal;
+    line-height:14px;
+}
+
+.waf-theme .waf-widget.waf-wlistview li.rssList .links{
+    margin-top:-11px;
+    color:#aaa;
+    text-align:right;
+    float:right;
+}
+
+.waf-theme .waf-widget.waf-wlistview li.rssList .links a{
+    color:#48bad6;
+}

@@ -1,5 +1,8 @@
 ﻿/** 
- * @fileOverview Component with grid for working with user foods
+ * @fileOverview Web Component: Food Grid
+ * List of foods the user has added custom, or picked from the list of general foods. Has
+ * buttons to let them add/delete from their list, and also a button to add a food from 
+ * the list of general foods.
  * @author Welsh Harris
  * @created 08/08/2013
  *
@@ -8,112 +11,98 @@
  * @license Released under the MIT license (included in distribution in MIT LICENSE.txt)
  */
  
-(function Component (id) {// @lock
-
-// Add the code that needs to be shared between components here
-
+ /*global WAKL:false, _:false */
+ 
+(function Component (id) {
+"use strict";
 function constructor (id) {
-	"use strict";
+var $comp = this;
+this.name = 'loginDlg';
+this.load = function (data) {
 	
-	// @region beginComponentDeclaration// @startlock
-	var $comp = this;
-	this.name = 'foodGrid';
-	// @endregion// @endlock
-
-
-	//-------------------------------------------------------------------------
-	//Component API
-	//-------------------------------------------------------------------------
-	var foodGrid = $$(getHtmlId("dataGrid1")),
-		addBtn = $$(getHtmlId("imageButton1")),
-		deleteBtn = $$(getHtmlId("imageButton2")),
-		genFoodBtn = $$(getHtmlId("imageButton3")),
-		searchText = $$(getHtmlId("textField1"));
-
-	//init
-	function initC() {
+	//component API
+    //=================================================================================================
+	var cs = $comp.sources,
+		cw = $comp.widgets,
+		foodGrid = cw.dataGrid1,
+		addBtn = cw.imageButton1,
+		deleteBtn = cw.imageButton3,
+		genFoodBtn = cw.imageButton2,
+		searchText = cw.textField1;
 		
-		//add button click event
-		WAF.addListener(addBtn, "click", function(event) {
-			WAKL.foodAddModDlg.add();
-		});
-		
-		//gen food button click event
-		WAF.addListener(genFoodBtn, "click", function(event) {
-			WAKL.genFoodAddDlg.open();
-		});
-		
-		//delete button click event
-		WAF.addListener(deleteBtn, "click", function(event) {
-			removeFood();
-		});
-		
-		//grid onRowClick event
-		WAF.addListener(foodGrid, "onRowClick", function(event) {
-			WAKL.qtyAddArea.setAndGotoQty();
-		});
-		
-		//grid onRowDblClick event
-		WAF.addListener(foodGrid, "onRowDblClick", function(event) {
-			WAKL.foodAddModDlg.modify();
-		});
-			
-		//search bar on keyup event
-		WAF.addListener(searchText, "keyup", _.throttle(
-			function(event) {
-				search();
-			}, 
-			300, {leading: false})
-		);
-		
-		//load all the user food entities
-		sources.food.allEntities({onError: WAKL.err.handler});
-
-	}
-
-	//delete the current food
+	/** delete the current food */
 	function removeFood() {
-		sources.food.removeCurrent({onError: WAKL.err.handler});
+		sources.userFood.removeCurrent({onError: WAKL.err.handler});
 	}
 	
-	//do a contains search when user types in the search bar
+	/** do a contains search when user types in the search bar */
 	function search() {
 		var searchVal = "*"+searchText.getValue()+"*";
-		sources.food.query("name = :1", {
+		sources.userFood.query("name = :1", {
 			params: [searchVal],
 			onError: WAKL.err.handler
 		});
 	}
 	
-	//called from another component to add a new food
+	/** 
+	 * called from another component to add a new food 
+	 * @param {string} name - Name of the food
+	 * @param {number} calories - Calories for the food
+	 */
 	function add(name, calories) {
-		sources.food.addNewElement();
-		sources.food.name = name;
-		sources.food.calories = calories;
-		sources.food.save({onError: WAKL.err.handler});
+		sources.userFood.addNewElement();
+		sources.userFood.name = name;
+		sources.userFood.calories = calories;
+		sources.userFood.save({onError: WAKL.err.handler});
 		WAKL.qtyAddArea.setAndGotoQty();
 	}
 
-	//--------------------
+
+	//on load
+    //=================================================================================================
+    
+	//add button click event
+	addBtn.addListener("click", function(event) {
+		WAKL.foodAddModDlg.add();
+	});
+	
+	//gen food button click event
+	genFoodBtn.addListener("click", function(event) {
+		WAKL.genFoodAddDlg.open();
+	});
+	
+	//delete button click event
+	deleteBtn.addListener("click", function(event) {
+		removeFood();
+	});
+	
+	//grid onRowClick event
+	WAF.addListener(foodGrid, "onRowClick", function(event) {
+		WAKL.qtyAddArea.setAndGotoQty();
+	});
+	
+	//grid onRowDblClick event
+	WAF.addListener(foodGrid, "onRowDblClick", function(event) {
+		WAKL.foodAddModDlg.modify();
+	});
+		
+	//search bar on keyup event
+	searchText.addListener("keyup", _.throttle(
+		function(event) {
+			search();
+		}, 
+		300, {leading: false})
+	);
+	
+	//load all the user food entities
+	sources.userFood.allEntities({onError: WAKL.err.handler});
+
+	
 	//public API
-	//--------------------
-	this.initC = initC;
+    //=================================================================================================
 	this.add = add;
-
-
-	this.load = function (data) {// @lock
-
-	// @region namespaceDeclaration// @startlock
-	// @endregion// @endlock
-
-	// eventHandlers// @lock
-
-	// @region eventManager// @startlock
-	// @endregion// @endlock
-
-	};// @lock
-
-
-}// @startlock
+	
+};
+}
 return constructor;
-})();// @endlock
+})();

@@ -1,74 +1,63 @@
-﻿
-(function Component (id) {// @lock
-
-// Add the code that needs to be shared between components here
-
+﻿/** 
+ * @fileOverview Web Component: Header
+ * @author Welsh Harris
+ * @created 08/08/2013
+ *
+ * @name Wakalorie
+ * @copyright (c) 2013 CoreBits DataWorks LLC
+ * @license Released under the MIT license (included in distribution in MIT LICENSE.txt)
+ */
+ 
+ /*global WAKL:false */
+ 
+(function Component (id) {
+"use strict";
 function constructor (id) {
-	"use strict";
+var $comp = this;
+this.name = 'loginDlg';
+this.load = function (data) {
 	
-	// @region beginComponentDeclaration// @startlock
-	var $comp = this;
-	this.name = 'header';
-	// @endregion// @endlock
-
-	//-------------------------------------------------------------------------
-	//Component API
-	//-------------------------------------------------------------------------
-	var logoutBtn = $$(getHtmlId("button1")),
-		helpBtn = $$(getHtmlId("button2"));
-	
-	//init
-	function initC() {
+	//component API
+    //=================================================================================================
+	var cs = $comp.sources,
+		cw = $comp.widgets,
+		logoutBtn = cw.button1,
+		helpBtn = cw.button2;
 		
-		//logout button clicked
-		WAF.addListener(logoutBtn, "click", function(event) {
-			logout();
-		});	
-		
-		//help button clicked
-		WAF.addListener(helpBtn, "click", function(event) {
-			WAKL.tips.toggle();
-		});	
-		
-		//only make the buttons visible if the user is logged in
-		if (WAKL.auth.isLoggedIn() === true) {
-			logoutBtn.show();
-			helpBtn.show();
-		} else {
-			logoutBtn.hide();
-			helpBtn.hide();
-		}
-	}
-	
-	//logout
+	/** attempt to login */
 	function logout() {
 		WAKL.auth.logout(after_Logout);
 	}
 	
-	//after logout
+	/** code to run after logging out */
 	function after_Logout() {
 		window.location = WAKL.CONST.PAGE_LOGIN;
 	}
-		
+
+
+	//on load
+    //=================================================================================================   
+    
+	//logout button clicked
+	logoutBtn.addListener("click", function(event) {
+		logout();
+	});	
 	
-	//--------------------
-	//public API
-	//--------------------
-	this.initC = initC;
+	//help button clicked
+	helpBtn.addListener("click", function(event) {
+		WAKL.tips.toggle();
+	});	
 	
-	this.load = function (data) {// @lock
-
-	// @region namespaceDeclaration// @startlock
-	// @endregion// @endlock
-
-	// eventHandlers// @lock
-
-	// @region eventManager// @startlock
-	// @endregion// @endlock
-
-	};// @lock
-
-
-}// @startlock
+	//only make the buttons visible if the user is logged in
+	if (WAKL.auth.isLoggedIn() === true) {
+		logoutBtn.show();
+		helpBtn.show();
+	} else {
+		logoutBtn.hide();
+		helpBtn.hide();
+	}
+	
+};
+}
 return constructor;
-})();// @endlock
+})();

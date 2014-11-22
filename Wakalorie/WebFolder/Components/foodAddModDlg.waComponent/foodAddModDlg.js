@@ -1,5 +1,5 @@
 ﻿/** 
- * @fileOverview Component with dialog used to add or modify user foods 
+ * @fileOverview Web Component: User food add / modify dialog
  * @author Welsh Harris
  * @created 08/08/2013
  *
@@ -8,71 +8,46 @@
  * @license Released under the MIT license (included in distribution in MIT LICENSE.txt)
  */
  
-(function Component (id) {// @lock
-
-// Add the code that needs to be shared between components here
-
+ /*global WAKL:false, _:false */
+ 
+(function Component (id) {
+"use strict";
 function constructor (id) {
-	"use strict";
+var $comp = this;
+this.name = 'foodAddModDlg';
+this.load = function (data) {
 	
-	// @region beginComponentDeclaration// @startlock
-	var $comp = this;
-	this.name = 'foodAddModDlg';
-	// @endregion// @endlock
-
-
-	//-------------------------------------------------------------------------
-	//Component API
-	//-------------------------------------------------------------------------
-	var titleText = $$(getHtmlId("richText1")),
-		nameFld = $$(getHtmlId("textField1")),
-		caloriesFld = $$(getHtmlId("textField2")),
-		saveBtn = $$(getHtmlId("button5")),
-		cancelBtn = $$(getHtmlId("button4"));
+	//component API
+    //=================================================================================================
+	var cs = $comp.sources,
+		cw = $comp.widgets,
+		titleText = cw.richText1,
+		nameFld = cw.textField1,
+		caloriesFld = cw.textField2,
+		saveBtn = cw.button5,
+		cancelBtn = cw.button4;
 	
-	//init
-	function initC() {
-		
-		//save button click event
-		WAF.addListener(saveBtn, "click", function(event) {
-			save();
-		});
-		
-		//cancel button click event
-		WAF.addListener(cancelBtn, "click", function(event) {
-			cancel();
-		});
-		
-		//attach an even to the calories field on the new food dialog so that if the user clicks the return key we will go ahead and save
-		$("#"+caloriesFld.id).keydown(function (event) {
-			if (event.which === 13) {
-				sources.food.calories = caloriesFld.getValue(); //without this it won't recognize if the value changed
-				save();
-			}
-		});
-	}
-	
-	//open the dialog to create a new food
+	/** open the dialog to create a new food */
 	function add() {
-		sources.food.addNewElement();
+		sources.userFood.addNewElement();
 		$comp.show();
 		titleText.setValue("New Food");
 		nameFld.focus();
 	}
 	
-	//open the dialog to modify an existing food
+	/** open the dialog to modify an existing food */
 	function modify() {
 		$comp.show();
 		titleText.setValue("Edit Food");
 		nameFld.focus();
 	}
 	
-	//save the food, go to the qty area and set to 1, close the dialog
+	/** save the food, go to the qty area and set to 1, close the dialog */
 	function save() {
-		sources.food.save({
+		sources.userFood.save({
 			onSuccess: function(event) {
 				$comp.hide();
-				WAKL.qtyAddArea.setAndGotoQty()
+				WAKL.qtyAddArea.setAndGotoQty();
 			},
 			onError: function(event) {
 				cancel();
@@ -81,37 +56,44 @@ function constructor (id) {
 		});
 	}
 	
-	//user clicked the cancel button
+	/** user clicked the cancel button */
 	function cancel() {
-		var isNew = sources.food.isNewElement();
+		var isNew = sources.userFood.isNewElement();
 		
 		if (isNew) {
-			sources.food.removeCurrentReference();
+			sources.userFood.removeCurrentReference();
 		}
 		$comp.hide();
 	}
+		
+
+	//on load
+    //=================================================================================================
+    
+    //save button click event
+	saveBtn.addListener("click", function(event) {
+		save();
+	});
 	
-	//--------------------
+	//cancel button click event
+	cancelBtn.addListener("click", function(event) {
+		cancel();
+	});
+	
+	//attach an even to the calories field on the new food dialog so that if the user clicks the return key we will go ahead and save
+	$("#"+caloriesFld.id).keydown(function (event) {
+		if (event.which === 13) {
+			sources.userFood.calories = caloriesFld.getValue(); //without this it won't recognize if the value changed
+			save();
+		}
+	});
+	
 	//public API
-	//--------------------
-	this.initC = initC;
+    //=================================================================================================
 	this.add = add;
 	this.modify = modify;
 	
-	
-	this.load = function (data) {// @lock
-
-	// @region namespaceDeclaration// @startlock
-	// @endregion// @endlock
-
-	// eventHandlers// @lock
-
-	// @region eventManager// @startlock
-	// @endregion// @endlock
-
-	};// @lock
-
-
-}// @startlock
+};
+}
 return constructor;
-})();// @endlock
+})();
